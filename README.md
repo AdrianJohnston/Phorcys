@@ -1,2 +1,3 @@
-# PyDisplay
-Python implementation of the Display (https://github.com/szym/display)
+# PyDisplay browser-based graphics server
+ 
+Oringinally forked from [display](https://github.com/szym/display)
