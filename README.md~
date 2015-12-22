@@ -1,18 +1,44 @@
 # display: a browser-based graphics server
-Originally forked from [display](https://github.com/szym/display) which was forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
 
+Originally forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
+
+The initial goal was to remain compatible with the torch/python API of `gfx.js`,
+but remove the term.js/tty.js/pty.js stuff which is served just fine by ssh.
+
+Compared to `gfx.js`:
+
+  - no terminal windows (no term.js)
+  - [dygraphs](http://dygraphs.com/) instead of nvd3 (have built in zoom and are perfect for time-series plots)
+  - plots resize when windows are resized
+  - images support zoom and pan
+  - image lists are rendered as one image to speed up loading
+  - windows remember their positions
+  - implementation not relying on the filesystem, supports remote clients (sources)
+
+## Installation and usage
+
+Install for Torch via:
+
+    luarocks install https://raw.githubusercontent.com/szym/display/master/display-scm-0.rockspec
 
 Install for Python (`numpy` required) via:
 
     python setup.py install [--user]
 
+Launch the server:
 
+    th -ldisplay.start [port [hostname]]
+
+Note, there is no authentication so **don't use "as is" for sensitive data**.
+By default, the server listens on localhost. Pass `0.0.0.0` to allow external connections on any interface.
 
 See `example.lua` or `example.py` for sample usage.
 
     disp = require 'display'
     disp.image(image.lena())
     disp.plot(torch.cat(torch.linspace(0, 10, 10), torch.randn(10), 2))
+
+![](https://raw.github.com/szym/display/master/example.png)
 
 ### Supported commands
 
