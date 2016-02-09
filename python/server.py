@@ -22,28 +22,6 @@ subscriptions = []
 def health():
     return '200 OK'
 
-debug_template = """
-     <html>
-       <head>
-       </head>
-       <body>
-         <h1>Server sent events</h1>
-         <div id="event"></div>
-         <script type="text/javascript">
-
-         var eventOutputContainer = document.getElementById("event");
-         var evtSrc = new EventSource("/events");
-
-         evtSrc.onmessage = function(e) {
-             console.log(e.data);
-             eventOutputContainer.innerHTML = e.data;
-         };
-
-         </script>
-       </body>
-     </html>
-    """
-
 class ServerSentEvent(object):
 
     def __init__(self, data):

@@ -1,7 +1,7 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
-  name='display',
+  name='PyDisplay',
   version='0.1dev',
   packages=['display'],
   package_dir={'display': 'python'},
