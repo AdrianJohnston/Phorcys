@@ -9,7 +9,7 @@ Install for Python (`numpy` required) via:
 
 
 
-See `example.lua` or `example.py` for sample usage.
+See `example.py` for sample usage.
 
     disp = require 'display'
     disp.image(image.lena())
@@ -43,5 +43,3 @@ The Lua client sends JSON commands directly to the server. The browser script
 interprets these commands, e.g.
 
     { command: 'image', src: 'data:image/png;base64,....', title: 'lena' }
-
-
