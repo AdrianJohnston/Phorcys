@@ -1,5 +1,4 @@
 import gevent
-
 from flask import Flask, Response
 from flask import render_template
 from flask import request
@@ -95,9 +94,13 @@ def subscribe():
     return Response(gen(), mimetype="text/event-stream")
 
 
+class DisplayServer():
+
+    def __init__(self, url="", port=5000):
+        app.debug = True
+        server = WSGIServer((url, port), app)
+        server.serve_forever()
+
 
 if __name__ == '__main__':
-
-    app.debug = True
-    server = WSGIServer(("", 5000), app)
-    server.serve_forever()
+    display_server = DisplayServer()

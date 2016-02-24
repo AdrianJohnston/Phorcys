@@ -25,7 +25,6 @@ __all__ = ['URL', 'image', 'images', 'plot']
 
 URL = 'http://localhost:5000/events'
 
-
 def uid():
   return 'pane_%s' % uuid.uuid4()
 
