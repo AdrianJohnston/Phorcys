@@ -1,0 +1,2 @@
+recursive-include PyDisplay/templates *
+recursive-include PyDisplay/static *
