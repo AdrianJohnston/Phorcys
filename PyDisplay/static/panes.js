@@ -114,7 +114,7 @@ function Pane(id) {
   closeButton.title = 'close';
 
   var cloneButton = document.createElement('button');
-  cloneButton.innerHTML = 'o';
+  cloneButton.innerHTML = '-';
   cloneButton.title = 'disconnect';
 
   var title = document.createElement('div');
@@ -582,11 +582,132 @@ function AudioPane(id) {
   this.content = audio;
 }
 
-AudioPane.prototype = extend(Object.create(Pane.prototype), {
-  setContent: function(audio_data) {
-    this.content.src = audio_data;
+
+function MeshPane(id) {
+    Pane.call(this, id);
+
+    var self = this;
+    var content = this.content;
+    var txt = document.createElement('p');
+
+    var scene, camera, renderer, stats;
+    var geometry, material, mesh;
+    var light, controls;
+    var width  = 400;
+    var height = 400;
+
+    function init(element) {
+
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera( 75, width / height, 1, 10000 );
+        camera.position.z = 1000;
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize( width, height );
+
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+		controls.enableDamping = true;
+		controls.dampingFactor = 0.25;
+		controls.enableZoom = true;
+
+        var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+        var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
+
+        for ( var i = 0; i < 500; i ++ ) {
+
+            var mesh = new THREE.Mesh( geometry, material );
+            mesh.position.x = ( Math.random() - 0.5 ) * 1000;
+            mesh.position.y = ( Math.random() - 0.5 ) * 1000;
+            mesh.position.z = ( Math.random() - 0.5 ) * 1000;
+            mesh.updateMatrix();
+            mesh.matrixAutoUpdate = false;
+            scene.add( mesh );
+
+        }
+
+        // lights
+
+        light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 1, 1, 1 );
+        scene.add( light );
+
+        light = new THREE.DirectionalLight( 0x002288 );
+        light.position.set( -1, -1, -1 );
+        scene.add( light );
+
+        light = new THREE.AmbientLight( 0x222222 );
+        scene.add( light );
+
+        //
+
+        //stats = new Stats();
+        //stats.domElement.style.position = 'absolute';
+        //stats.domElement.style.top = '0px';
+        //stats.domElement.style.zIndex = 100;
+        //container.appendChild( stats.domElement );
+        element.appendChild( renderer.domElement );
+
+    }
+
+    function onWindowResize() {
+
+        self.width = content.clientWidth;
+        self.height = content.clientHeight;
+        camera.aspect = width / height;
+
+        camera.updateProjectionMatrix();
+        renderer.setSize( self.width, self.height );
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+        controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
+        render();
+    }
+
+    function render() {
+        renderer.render( scene, camera );
+    }
+
+
+
+    init(content);
+    animate();
+
+    on(content, 'mousedown', function(ev) {
+       onWindowResize();
+      });
+    render();
+    //content.appendChild(txt);
+    //content.appendChild(script_tag);
+
+    this.content = renderer.domElement;
+}
+
+MeshPane.prototype = extend(Object.create(Pane.prototype), {
+  setContent: function(txt) {
+    //this.content.innerHTML = txt;
   },
 });
+
+function IsosurfacePane(id) {
+  Pane.call(this, id);
+
+  var self = this;
+  var content = this.content;
+  var txt = document.createElement('p');
+  txt.className = 'content-text';
+  content.appendChild(txt);
+  this.content = txt;
+}
+
+IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
+  //setContent: function(txt) {
+  //  this.content.innerHTML = txt;
+  //},
+});
+
 
 ///////////////////
 // Display "server"
@@ -596,6 +717,8 @@ var PaneTypes = {
   plot: PlotPane,
   text: TextPane,
   audio: AudioPane,
+  mesh: MeshPane,
+  isosurface: IsosurfacePane,
 }
 
 var Commands = {

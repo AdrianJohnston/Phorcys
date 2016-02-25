@@ -18,9 +18,9 @@ html {
   overflow: hidden;
   box-sizing: border-box;
   padding-top: 18px;
-  border: #555 solid 1px;
-  background: #ccc;
-  border-radius: 4px;
+  border: #555 solid 0px;
+  background: #FFF;
+  border-radius: 0px;
   position: absolute;
   top: 20px;
   left: 20px;
@@ -51,19 +51,20 @@ html {
 
 button {
   border: none;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 14px;
   cursor: pointer;
 }
 
 button:hover {
   font-weight: bold;
+  color:#CC0000;
 }
 
 .bar button {
   background: transparent;
   margin: 0 4px;
-  float: left;
+  float: right;
 }
 
 #status {
@@ -83,9 +84,10 @@ button:hover {
 
 .title {
   position: absolute;
-  right: 5px;
+  left: 5px;
   top: 2px;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: bold;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: -moz-none;

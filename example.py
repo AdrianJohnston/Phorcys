@@ -30,3 +30,8 @@ for i in range(15, 25):
   time.sleep(0.2)
   data.append([i, random.random(), random.random() * 2])
   plot(data, win=win)
+
+
+txt_win = text("Hello World", title='Text Pane Test')
+
+mesh("This will be mesh data", title='Mesh Pane Test')

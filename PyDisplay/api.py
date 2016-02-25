@@ -21,7 +21,7 @@ else:
 
 import png
 
-__all__ = ['URL', 'image', 'images', 'plot']
+__all__ = ['URL', 'image', 'images', 'plot', 'text', 'mesh', 'isosurface']
 
 URL = 'http://localhost:5000/events'
 
@@ -119,19 +119,14 @@ def plot(data, **opts):
   return pane('plot', opts.get('win'), opts.get('title'), content=options)
 
 def text(data, **opts):
+  return pane('text', opts.get('win'), opts.get('title'), content=data)
 
-  #   win = opts.get('win') or uid()
-  #
-  #
-  # # TODO: if img is a 3d tensor, then unstack it into a list of images
-  #
-  #   pngbytes = png.encode(img.tostring(), img.shape[1], img.shape[0])
-  #   imgdata = 'data:image/png;base64,' + base64.b64encode(pngbytes).decode('ascii')
-  #
-  #   send(command='image', id=win, src=imgdata,
-  #       labels=opts.get('labels'),
-  #       width=opts.get('width'),
-  #       title=opts.get('title'))
-  #
-  # return win
+
+def mesh(data, **opts):
+  return pane('mesh', opts.get('win'), opts.get('title'), content=data)
+
+
+def isosurface(data, **opts):
+  #return pane('text', opts.get('win'), opts.get('title'), content=data)
   raise Exception('Not implemented')
+
