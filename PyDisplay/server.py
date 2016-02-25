@@ -61,7 +61,7 @@ def publish():
     print("Publishing")
 
     payload = request.data
-    print("Error in payload")
+    #print("Error in payload")
     try:
         print ("Data", payload)
         data = json.loads(request.data)

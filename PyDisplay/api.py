@@ -43,6 +43,12 @@ def send(**command):
     return False
 
 
+def pane(panetype, win, title, content):
+  win = win or uid()
+  send(command='pane', type=panetype, id=win, title=title, content=content)
+  return win
+
+
 def normalize(img, opts):
   minval = opts.get('min')
   if minval is None:
@@ -65,7 +71,6 @@ def to_rgb(img):
 
 def image(img, **opts):
   assert img.ndim == 2 or img.ndim == 3
-  win = opts.get('win') or uid()
 
   if isinstance(img, list):
     return images(img, opts)
@@ -75,10 +80,11 @@ def image(img, **opts):
   pngbytes = png.encode(img.tostring(), img.shape[1], img.shape[0])
   imgdata = 'data:image/png;base64,' + base64.b64encode(pngbytes).decode('ascii')
 
-  send(command='image', id=win, src=imgdata,
-    labels=opts.get('labels'),
-    width=opts.get('width'),
-    title=opts.get('title'))
+  return pane('image', opts.get('win'), opts.get('title'), content={
+      'src': imgdata,
+      'labels': opts.get('labels'),
+      'width': opts.get('width'),
+  })
   return win
 
 
@@ -95,8 +101,6 @@ def plot(data, **opts):
     labels: list of series names, first series is always the X-axis
     see http://dygraphs.com/options.html for other supported options
   """
-  win = opts.get('win') or uid()
-
   dataset = {}
   if type(data).__module__ == numpy.__name__:
     dataset = data.tolist()
@@ -112,5 +116,22 @@ def plot(data, **opts):
   # Don't pass our options to dygraphs.
   options.pop('win', None)
 
-  send(command='plot', id=win, title=opts.get('title'), options=options)
-  return win
+  return pane('plot', opts.get('win'), opts.get('title'), content=options)
+
+def text(data, **opts):
+
+  #   win = opts.get('win') or uid()
+  #
+  #
+  # # TODO: if img is a 3d tensor, then unstack it into a list of images
+  #
+  #   pngbytes = png.encode(img.tostring(), img.shape[1], img.shape[0])
+  #   imgdata = 'data:image/png;base64,' + base64.b64encode(pngbytes).decode('ascii')
+  #
+  #   send(command='image', id=win, src=imgdata,
+  #       labels=opts.get('labels'),
+  #       width=opts.get('width'),
+  #       title=opts.get('title'))
+  #
+  # return win
+  raise Exception('Not implemented')
