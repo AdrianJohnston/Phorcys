@@ -21,7 +21,7 @@ else:
 
 import png
 
-__all__ = ['URL', 'image', 'images', 'plot', 'text', 'mesh', 'isosurface']
+__all__ = ['URL', 'image', 'images', 'plot', 'text', 'mesh', 'isosurface', 'graph3d']
 
 URL = 'http://localhost:5000/events'
 
@@ -129,4 +129,30 @@ def mesh(data, **opts):
 def isosurface(data, **opts):
   #return pane('text', opts.get('win'), opts.get('title'), content=data)
   raise Exception('Not implemented')
+
+
+def graph3d(data, **opts):
+  """ Plot data as 3D surface chart.
+  Params:
+    data: either a 2-d numpy array or a list of lists.
+    win: pane id
+    labels: list of series names, first series is always the X-axis
+    see http://dygraphs.com/options.html for other supported options
+  """
+  dataset = {}
+  if type(data).__module__ == numpy.__name__:
+    dataset = data.tolist()
+  else:
+    dataset = data
+
+  # clone opts into options
+  options = dict(opts)
+  options['file'] = dataset
+  if options.get('labels'):
+    options['xlabel'] = options['labels'][0]
+
+  # Don't pass our options to dygraphs.
+  options.pop('win', None)
+
+  return pane('graph3d', opts.get('win'), opts.get('title'), content=options)
 

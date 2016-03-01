@@ -13,10 +13,6 @@ app = Flask(__name__)
 subscriptions = []
 
 
-# @app.route('/')
-# def index():
-#     return render_template("index.html")
-
 @app.route('/health/', methods=['GET'])
 def health():
     return '200 OK'

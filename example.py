@@ -35,3 +35,5 @@ for i in range(15, 25):
 txt_win = text("Hello World", title='Text Pane Test')
 
 mesh("This will be mesh data", title='Mesh Pane Test')
+
+win2 = graph3d(data, labels=[ 'position', 'a', 'b' ], title='progress')

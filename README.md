@@ -1,10 +1,10 @@
 # PyDisplay: a browser-based graphics server
 Originally forked from [display](https://github.com/szym/display) which was forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
 
-The ultimate goal of this project is to provide a simple visualisation package for python based deep learning projects.
+The ultimate goal of this project is to provide a simple visualisation package for python based projects.
 
 Why port from Lua?
-Most linux machines come with
+Most linux machines come with python.
 
 
 Install for Python (`numpy` required) via:
@@ -37,6 +37,14 @@ Common parameters:
 
 `text` sends raw HTML
 
+`audio` creates an audio pane
+
+`mesh` given a set of 3D vertices and faces, will create a Three.Js rendering
+
+`isosurface` given a 3D volume, will render the isosurface using Three.Js and the marching cubes algorithm
+
+`graph3d` creates a 3D graph of multiple types, using vis.js
+
 ## Technical overview
 
 The server is a trivial message forwarder:
@@ -50,9 +58,11 @@ interprets these commands, e.g.
 
 ## TODO
 
+Replace Dygraph with Visjs
+
 Commands:
-`audio` - port from [display](https://github.com/szym/display)
-`WebGL` - possibly use Vispy or raw Three.js
+`audio` - port from [display](https://github.com/szym/display) - Mostly completed
+`WebGL` - possibly use Vispy or raw Three.js - On its way
 `video` - could possibly just use raw video html tags
 
 Higher Level functions:

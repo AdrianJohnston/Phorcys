@@ -708,6 +708,66 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
   //},
 });
 
+function Graph3DPane(id){
+  Pane.call(this, id);
+
+  var self = this;
+  var content = this.content;
+  var visualisation = document.createElement('div');
+  visualisation.id = "visualisation";
+  content.appendChild(visualisation);
+
+    // specify options
+    var options = this.options = {
+        width:  '500px',
+        height: '552px',
+        style: 'surface',
+        showPerspective: true,
+        showGrid: true,
+        showShadow: false,
+        keepAspectRatio: true,
+        verticalRatio: 0.5
+    };
+
+    // Instantiate our graph object.
+    //var container = document.getElementById('visualisation');
+    this.graph3d = new vis.Graph3d(visualisation);
+    //content.appendChild(txt);
+    //this.content = visualisation;
+}
+
+Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
+  setContent: function(opts) {
+    //this.graph.updateOptions(opts);
+
+    // Create and populate a data table.
+    var data = new vis.DataSet();
+    // create some nice looking data with sin/cos
+    var counter = 0;
+    var steps = 50;  // number of datapoints will be steps*steps
+    var axisMax = 314;
+    var axisStep = axisMax / steps;
+    for (var x = 0; x < axisMax; x+=axisStep) {
+        for (var y = 0; y < axisMax; y+=axisStep) {
+            var value = (Math.sin(x/50) * Math.cos(y/50) * 50 + 50);
+            data.add({id:counter++,x:x,y:y,z:value,style:value});
+        }
+    }
+
+    //data.add(opts.file);
+    console.log(JSON.stringify(opts));
+    console.log(JSON.stringify(opts.file));
+    console.log(JSON.stringify(this.options));
+    this.graph3d.setData(data);
+    this.graph3d.setOption(this.options)
+  },
+
+   onresize: function() {
+    //This needs to be this.graph3d.setSize(pane.width, pane.height)
+     //this.graph3d.redraw();
+  },
+
+});
 
 ///////////////////
 // Display "server"
@@ -719,6 +779,7 @@ var PaneTypes = {
   audio: AudioPane,
   mesh: MeshPane,
   isosurface: IsosurfacePane,
+  graph3d: Graph3DPane,
 }
 
 var Commands = {
