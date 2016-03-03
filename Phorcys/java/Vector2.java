@@ -30,10 +30,4 @@ public class Vector2 {
 	public String getLabel(){
 		return label;
 	}
-	
-	
-	@Override
-	public String toString(){
-		return getX()+","+getY();
-	}
 }

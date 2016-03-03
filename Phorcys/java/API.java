@@ -44,7 +44,7 @@ public class API{
 	 * @param paneToSend [description]
 	 */
 	public static boolean send(PaneToSend paneToSend){
-		System.out.println("Command: " + paneToSend.toString());
+		System.out.println("Command: " + paneToSend.toString().replace("\\",""));
 		try {
 			HttpResponse<String> response = Unirest.post(URL)
 				.header("Content-Type", "application/text")
@@ -66,7 +66,7 @@ public class API{
 				
 	}
 
-	public static String pane(String paneType, String uid, String title, String content){
+	public static String pane(String paneType, String uid, String title, JsonValue content){
 		if (uid == null){
 			uid = uid();
 		} else if (uid.length() == 0){
@@ -90,26 +90,26 @@ public class API{
 	 * @return
 	 */
 	public static String text(String uid, String title, String content){
-		return pane("text", uid, title, content);
-	}
-
-	public static String mesh(String uid, String title, String content){
-		return pane("mesh", uid, title, content);
-	}
-
-	public static String image(String uid, String title, String content){
-		return pane("image", uid, title, content);
-	}
-
-	public static String isosurface(String uid, String title, String content){
-		return pane("isosurface", uid, title, content);
+		return pane("text", uid, title, Json.value(content));
 	}
 	
-	public static String plot2D(String uid, String title, String[] labels, String xLabel, String yLabel, Vector2[] dataPoints){
-				
-	
-		return "";
+	public static String plot2D(String uid, String title, Plot2D plot2d){				
+		return pane("plot",uid, title, plot2d.getJson());
 	}
+
+//	public static String mesh(String uid, String title, String content){
+//		return pane("mesh", uid, title, content);
+//	}
+//
+//	public static String image(String uid, String title, String content){
+//		return pane("image", uid, title, content);
+//	}
+//
+//	public static String isosurface(String uid, String title, String content){
+//		return pane("isosurface", uid, title, content);
+//	}
+	
+
 }
 
 class PaneToSend{
@@ -117,10 +117,10 @@ class PaneToSend{
 	String paneType;
 	String uid;
 	String title;
-	String content;
+	JsonValue content;
 
 
-	PaneToSend(String paneType, String uid, String title, String content) {
+	PaneToSend(String paneType, String uid, String title, JsonValue content) {
 		this.paneType = paneType;
 		this.uid = uid;
 		this.title = title;
@@ -128,6 +128,7 @@ class PaneToSend{
 
 		json = Json.object().add("type", paneType).add("command","pane").add("id",uid).add("title",title).add("content",content);
 	}
+	
 
 	@Override
 	public String toString(){
