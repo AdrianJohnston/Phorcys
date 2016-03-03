@@ -3,6 +3,8 @@
 	//Make more sensible classes[]
 	//Make sure all content is JSON (need JSON writer in visualised process)[]
 	//Actually write docs []
+	//Give this a better name
+	//Customisable URL
 
 public class API{
 	static String URL = "http://localhost:5000/events";
@@ -43,6 +45,24 @@ public class API{
 		send(new PaneToSend(paneType, uid_a, title, content));
 
 		return uid_a;
+	}
+
+	//Methods to call the different types of panes
+	//TODO: actually make these correct
+	public long text(long uid, String title, String content){
+		return pane("text", uid, title, content);
+	}
+
+	public long mesh(long uid, String title, String content){
+		return pane("mesh", uid, title, content);
+	}
+
+	public long image(long uid, String title, String content){
+		return pane("image", uid, title, content);
+	}
+
+	public long isosurface(long uid, String title, String content){
+		return pane("isosurface", uid, title, content);
 	}
 }
 
