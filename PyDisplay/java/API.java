@@ -16,8 +16,12 @@
 
 
 import com.mashape.unirest.http.*;
-import com.mashape.unirest.http.exceptions.UniRestException;
-import com.eclipsesource.json.src.*;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
 
 public class API{
 	static String URL = "http://localhost:5000/events";
@@ -26,7 +30,7 @@ public class API{
 	 * [send description]
 	 * @param paneToSend [description]
 	 */
-	public static void send(PaneToSend paneToSend){
+	public static boolean send(PaneToSend paneToSend){
 		//TODO: this
 		// String command = json.dumps(command);
 		System.out.println("Command: " + paneToSend.toString());
@@ -35,16 +39,16 @@ public class API{
 		// req.data = command.encode('ascii')
 		// 
 		// I have noooo idea if this works
-		HttpResponse<String> response = Unirest.post(URL)
-			.header("Content-Type", "application/text")
-			.data(command)
-			.asString();
-
-		// try {
-
-		// } catch(UniRestException){
-
-		// }
+		try {
+			HttpResponse<String> response = Unirest.post(URL)
+				.header("Content-Type", "application/text")
+				.body(paneToSend.toString())
+				.asString();
+			return true;
+		} catch(UnirestException e){
+			e.printStackTrace();
+			return false;
+		}
 
 		// try:
 		//   resp = urlopen(req)
@@ -94,7 +98,7 @@ public class API{
 }
 
 class PaneToSend{
-	JSONObject json;
+	JsonObject json;
 	String paneType;
 	long uid;
 	String title;
@@ -107,15 +111,15 @@ class PaneToSend{
 		this.title = title;
 		this.content = content;
 
-		json.object().add("type", paneType);
-		json.object().add("command","pane");
-		json.object().add("id",uid);
-		json.object().add("title",title);
-		json.object().add("content",content);
+		json = Json.object().add("type", paneType);
+		json = Json.object().add("command","pane");
+		json = Json.object().add("id",uid);
+		json = Json.object().add("title",title);
+		json = Json.object().add("content",content);
 	}
 
 	@Override
 	public String toString(){
-		json.toString();
+		return json.toString();
 	}
 }
