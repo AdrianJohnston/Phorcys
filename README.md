@@ -1,4 +1,4 @@
-# PyDisplay: a browser-based graphics server
+# Phorycs: a browser-based graphics server
 Originally forked from [display](https://github.com/szym/display) which was forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
 
 The ultimate goal of this project is to provide a simple visualisation package for python based projects.
