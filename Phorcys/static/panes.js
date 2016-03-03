@@ -747,19 +747,34 @@ Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
     var steps = 50;  // number of datapoints will be steps*steps
     var axisMax = 314;
     var axisStep = axisMax / steps;
-    for (var x = 0; x < axisMax; x+=axisStep) {
-        for (var y = 0; y < axisMax; y+=axisStep) {
-            var value = (Math.sin(x/50) * Math.cos(y/50) * 50 + 50);
-            data.add({id:counter++,x:x,y:y,z:value,style:value});
-        }
-    }
+
+    var in_arr = opts.file;
+    var length = in_arr.length;
+    var num_channels = in_arr[0].length;
+    //for (var x =0 ;x < )
+
+    //for (var x = 0; x < axisMax; x+=axisStep) {
+    //    for (var y = 0; y < axisMax; y+=axisStep) {
+    //        var value = (Math.sin(x/50) * Math.cos(y/50) * 50 + 50);
+    //        data.add({id:counter++,x:x,y:y,z:value,style:value});
+    //    }
+    //}
+      for(var i =0 ; i < length; i++) {
+
+          var x = in_arr[i][0];
+          var y = in_arr[i][1];
+          var z = in_arr[i][2];
+          data.add({id:i,x:x,y:y,z:z,style:z})
+      }
 
     //data.add(opts.file);
     console.log(JSON.stringify(opts));
     console.log(JSON.stringify(opts.file));
     console.log(JSON.stringify(this.options));
+    console.log(length.toString());
+    console.log(num_channels.toString());
     this.graph3d.setData(data);
-    this.graph3d.setOption(this.options)
+    //this.graph3d._setOption(this.options)
   },
 
    onresize: function() {

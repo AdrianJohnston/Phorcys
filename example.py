@@ -1,7 +1,7 @@
 from __future__ import print_function
 import numpy
 import random
-from PyDisplay import *
+from Phorcys import *
 
 
 def generate_image():
@@ -35,5 +35,29 @@ for i in range(15, 25):
 txt_win = text("Hello World", title='Text Pane Test')
 
 mesh("This will be mesh data", title='Mesh Pane Test')
+
+##Generate 3D surface
+
+import numpy as np
+
+steps = 50  # number of datapoints will be steps*steps
+axisMax = 314
+
+def generate_3D_grid(steps, axisMax):
+
+  axisStep = float(axisMax / steps)
+  X = np.arange(0, axisMax, axisStep)
+  Y = np.arange(0, axisMax, axisStep)
+  X, Y = np.meshgrid(X, Y)
+  Z = np.sin(X/50) * np.cos(Y/5) * 5 + 500
+  X = X.flatten()
+  Y = Y.flatten()
+  Z = Z.flatten()
+  data = np.concatenate([X[...,np.newaxis],Y[...,np.newaxis],Z[...,np.newaxis]], axis=1)
+  return data
+
+data = generate_3D_grid(steps, axisMax)
+
+print (data.shape)
 
 win2 = graph3d(data, labels=[ 'position', 'a', 'b' ], title='progress')
