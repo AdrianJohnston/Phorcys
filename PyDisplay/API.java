@@ -9,6 +9,7 @@
 
 //Dependencies:
 	//Uses the unirest http://unirest.io/java.html library. In particular the dependency filled jar
+	//JSON library is https://github.com/ralfstx/minimal-json
 
 //Notes:
 	
