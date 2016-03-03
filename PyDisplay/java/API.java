@@ -1,19 +1,20 @@
 //TODO: 
-	//Import things like JSON reader/writer []
+	//Import things like JSON reader/writer [√]
 	//Make more sensible classes []
 	//Make sure all content is JSON (need JSON writer in visualised process) []
 	//Actually write docs []
 	//Give this a better name []
-	//Customisable URL []
-	// 
+	//Customisable URL [√]
+	//Implement a UID generator [√]
 
 //Dependencies:
 	//Uses the unirest http://unirest.io/java.html library. In particular the dependency filled jar
 	//JSON library is minimal-json https://github.com/ralfstx/minimal-json
-		//this is the ugliest json lib but it's also actually maintained
+		//this is the ugliest json lib but it's also actually maintained unlike simple-json
 
 //Notes:
-
+	//Untested, but it's now very close to the Python API.
+	//A lot of client side JSON generation will need to be done (would like to avoid that...)
 
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -22,16 +23,20 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonValue;
 
+import java.util.UUID;
 
 public class API{
 	static String URL = "http://localhost:5000/events";
 
+	public static void setUrl(String url){
+		URL = url;
+	}
+	
 	/**
 	 * [send description]
 	 * @param paneToSend [description]
 	 */
 	public static boolean send(PaneToSend paneToSend){
-		//TODO: this
 		// String command = json.dumps(command);
 		System.out.println("Command: " + paneToSend.toString());
 		// req = Request(URL, 'POST')
@@ -49,29 +54,23 @@ public class API{
 			e.printStackTrace();
 			return false;
 		}
-
-		// try:
-		//   resp = urlopen(req)
-		//   return resp != None
-		// except:
-		//   raise
-		//   return False
 	}
 
 	/**
 	 * [A UID generator]
 	 * @return [A UID]
 	 */
-	public static long uid(){
-		//Use a UID generator
-		return 0;
+	public static String uid(){
+		//TODO: Use a UID generator
+		return UUID.randomUUID().toString();
+				
 	}
 
-	public static long pane(String paneType, long uid, String title, String content){
-		if (uid != 0){
+	public static String pane(String paneType, String uid, String title, String content){
+		if (uid != ""){
 			uid = uid();
 		}
-		long uid_a = uid;
+		String uid_a = uid;
 
 		send(new PaneToSend(paneType, uid_a, title, content));
 
@@ -80,46 +79,69 @@ public class API{
 
 	//Methods to call the different types of panes
 	//TODO: actually make these correct
-	public long text(long uid, String title, String content){
+	public static String text(String uid, String title, String content){
 		return pane("text", uid, title, content);
 	}
 
-	public long mesh(long uid, String title, String content){
+	public static String mesh(String uid, String title, String content){
 		return pane("mesh", uid, title, content);
 	}
 
-	public long image(long uid, String title, String content){
+	public static String image(String uid, String title, String content){
 		return pane("image", uid, title, content);
 	}
 
-	public long isosurface(long uid, String title, String content){
+	public static String isosurface(String uid, String title, String content){
 		return pane("isosurface", uid, title, content);
+	}
+	
+	public static String plot2D(String uid, String title, String[] labels, String xLabel, String yLabel, Vector2[] dataPoints){
+				
+	
+		return "";
 	}
 }
 
 class PaneToSend{
 	JsonObject json;
 	String paneType;
-	long uid;
+	String uid;
 	String title;
 	String content;
 
 
-	PaneToSend(String paneType, long uid, String title, String content) {
+	PaneToSend(String paneType, String uid, String title, String content) {
 		this.paneType = paneType;
 		this.uid = uid;
 		this.title = title;
 		this.content = content;
 
-		json = Json.object().add("type", paneType);
-		json = Json.object().add("command","pane");
-		json = Json.object().add("id",uid);
-		json = Json.object().add("title",title);
-		json = Json.object().add("content",content);
+		json = Json.object().add("type", paneType).add("command","pane").add("id",uid).add("title",title).add("content",content);
+//		json = Json.object().add("command","pane");
+//		json = Json.object().add("id",uid);
+//		json = Json.object().add("title",title);
+//		json = Json.object().add("content",content);
 	}
 
 	@Override
 	public String toString(){
 		return json.toString();
+	}
+}
+
+
+//This is really lazy, should move into it's own class so it can actually be used
+class Vector2{
+	double X;
+	double Y;
+	Vector2(double X, double Y){
+		this.X = X;
+		this.Y = Y;
+	}
+	public double getX(){
+		return X;
+	}
+	public double getY(){
+		return Y;
 	}
 }
