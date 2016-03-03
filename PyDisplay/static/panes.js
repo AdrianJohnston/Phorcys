@@ -718,7 +718,7 @@ function Graph3DPane(id){
   content.appendChild(visualisation);
 
     // specify options
-    var options = this.options = {
+    this.options = {
         width:  '500px',
         height: '552px',
         style: 'surface',
