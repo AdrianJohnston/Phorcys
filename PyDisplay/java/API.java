@@ -67,7 +67,7 @@ public class API{
 	}
 
 	public static String pane(String paneType, String uid, String title, String content){
-		if (uid != ""){
+		if (uid.length() == 0){
 			uid = uid();
 		}
 		String uid_a = uid;
@@ -79,6 +79,14 @@ public class API{
 
 	//Methods to call the different types of panes
 	//TODO: actually make these correct
+	
+	/**
+	 * Create a text pane
+	 * @param uid
+	 * @param title
+	 * @param content
+	 * @return
+	 */
 	public static String text(String uid, String title, String content){
 		return pane("text", uid, title, content);
 	}
@@ -117,10 +125,6 @@ class PaneToSend{
 		this.content = content;
 
 		json = Json.object().add("type", paneType).add("command","pane").add("id",uid).add("title",title).add("content",content);
-//		json = Json.object().add("command","pane");
-//		json = Json.object().add("id",uid);
-//		json = Json.object().add("title",title);
-//		json = Json.object().add("content",content);
 	}
 
 	@Override
