@@ -6,6 +6,13 @@
 	//Give this a better name []
 	//Customisable URL [√]
 	//Implement a UID generator [√]
+	/**Panes**/
+	//Text [√]
+	//Image []
+	//Plot2D []
+	//Plot3D []
+	//Mesh []
+	//IsoSurface []
 
 //Dependencies:
 	//Uses the unirest http://unirest.io/java.html library. In particular the dependency filled jar
@@ -37,13 +44,7 @@ public class API{
 	 * @param paneToSend [description]
 	 */
 	public static boolean send(PaneToSend paneToSend){
-		// String command = json.dumps(command);
 		System.out.println("Command: " + paneToSend.toString());
-		// req = Request(URL, 'POST')
-		// req.add_header('Content-Type', 'application/text') 
-		// req.data = command.encode('ascii')
-		// 
-		// I have noooo idea if this works
 		try {
 			HttpResponse<String> response = Unirest.post(URL)
 				.header("Content-Type", "application/text")
@@ -61,13 +62,14 @@ public class API{
 	 * @return [A UID]
 	 */
 	public static String uid(){
-		//TODO: Use a UID generator
 		return UUID.randomUUID().toString();
 				
 	}
 
 	public static String pane(String paneType, String uid, String title, String content){
-		if (uid.length() == 0){
+		if (uid == null){
+			uid = uid();
+		} else if (uid.length() == 0){
 			uid = uid();
 		}
 		String uid_a = uid;
@@ -130,22 +132,5 @@ class PaneToSend{
 	@Override
 	public String toString(){
 		return json.toString();
-	}
-}
-
-
-//This is really lazy, should move into it's own class so it can actually be used
-class Vector2{
-	double X;
-	double Y;
-	Vector2(double X, double Y){
-		this.X = X;
-		this.Y = Y;
-	}
-	public double getX(){
-		return X;
-	}
-	public double getY(){
-		return Y;
 	}
 }

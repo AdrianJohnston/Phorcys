@@ -1,7 +1,7 @@
 from __future__ import print_function
 import numpy
 import random
-from PyDisplay import *
+from Phorcys import *
 
 
 def generate_image():
