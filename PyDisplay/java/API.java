@@ -13,10 +13,11 @@
 		//this is the ugliest json lib but it's also actually maintained
 
 //Notes:
-	
+
 
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UniRestException;
+import com.eclipsesource.json.src.*;
 
 public class API{
 	static String URL = "http://localhost:5000/events";
@@ -27,8 +28,8 @@ public class API{
 	 */
 	public static void send(PaneToSend paneToSend){
 		//TODO: this
-		String command = json.dumps(command);
-		System.out.println("Command" + command);
+		// String command = json.dumps(command);
+		System.out.println("Command: " + paneToSend.toString());
 		// req = Request(URL, 'POST')
 		// req.add_header('Content-Type', 'application/text') 
 		// req.data = command.encode('ascii')
@@ -39,11 +40,11 @@ public class API{
 			.data(command)
 			.asString();
 
-		try {
+		// try {
 
-		} catch(UniRestException){
+		// } catch(UniRestException){
 
-		}
+		// }
 
 		// try:
 		//   resp = urlopen(req)
@@ -111,5 +112,10 @@ class PaneToSend{
 		json.object().add("id",uid);
 		json.object().add("title",title);
 		json.object().add("content",content);
+	}
+
+	@Override
+	public String toString(){
+		json.toString();
 	}
 }
