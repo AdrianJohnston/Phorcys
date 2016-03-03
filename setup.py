@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='PyDisplay',
+    name='Phorcys',
     version='0.1dev',
-    package=['PyDisplay'],
-    package_dir=find_packages('PyDisplay'),
+    package=['Phorcys'],
+    package_dir=find_packages('Phorcys'),
     requires=['numpy'],
     # include_package_data=True,
 )

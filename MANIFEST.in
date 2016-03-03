@@ -1,2 +1,2 @@
-recursive-include PyDisplay/templates *
-recursive-include PyDisplay/static *
+recursive-include Phorcys/templates *
+recursive-include Phorcys/static *
