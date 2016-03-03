@@ -1,4 +1,6 @@
 # Phorcys: a browser-based graphics server
+Phorcys (pronounced /ˈfɔːrsᵻs/, "forceus"), a god of the hidden changes of the deep.
+
 Originally forked from [display](https://github.com/szym/display) which was forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
 
 The ultimate goal of this project is to provide a simple visualisation package for python based projects.
@@ -10,8 +12,6 @@ Most linux machines come with python.
 Install for Python (`numpy` required) via:
 
     python setup.py install [--user]
-
-
 
 See `example.py` for sample usage.
 
