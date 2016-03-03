@@ -1,10 +1,20 @@
 //TODO: 
-	//Import things like JSON reader/writer[]
-	//Make more sensible classes[]
-	//Make sure all content is JSON (need JSON writer in visualised process)[]
+	//Import things like JSON reader/writer []
+	//Make more sensible classes []
+	//Make sure all content is JSON (need JSON writer in visualised process) []
 	//Actually write docs []
-	//Give this a better name
-	//Customisable URL
+	//Give this a better name []
+	//Customisable URL []
+	// 
+
+//Dependencies:
+	//Uses the unirest http://unirest.io/java.html library. In particular the dependency filled jar
+
+//Notes:
+	
+
+import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.exceptions.UniRestException;
 
 public class API{
 	static String URL = "http://localhost:5000/events";
@@ -14,11 +24,21 @@ public class API{
 	 * @param paneToSend [description]
 	 */
 	public static void send(PaneToSend paneToSend){
-		// command = json.dumps(command)
-		// print("Command" + str(command))
+		//TODO: this
+		String command = json.dumps(command);
+		System.out.println("Command" + command);
 		// req = Request(URL, 'POST')
 		// req.add_header('Content-Type', 'application/text')
 		// req.data = command.encode('ascii')
+		// 
+		// I have noooo idea if this works
+		HttpResponse<String> response = Unirest.post(URL)
+			.header("Content-Type", "application/text")
+			.data(command)
+			.asString();
+
+
+
 		// try:
 		//   resp = urlopen(req)
 		//   return resp != None
