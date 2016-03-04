@@ -62,7 +62,7 @@ public class API{
 	 * @return [A UID]
 	 */
 	public static String uid(){
-		return UUID.randomUUID().toString();
+		return "pane_"+UUID.randomUUID().toString();
 				
 	}
 
@@ -93,17 +93,40 @@ public class API{
 		return pane("text", uid, title, Json.value(content));
 	}
 	
+	/**
+	 * Create a Plot2D pane
+	 * @param uid
+	 * @param title
+	 * @param plot2d
+	 * @return
+	 */
 	public static String plot2D(String uid, String title, Plot2D plot2d){				
 		return pane("plot",uid, title, plot2d.getJson());
 	}
+	
+	public static String image(String uid, String title, JsonValue content){
+		//Check dimensions are okay
+		
+		//If image is a list of images, uses images instead
+		
+		//normalise and to_rgb img
+
+		//get image as bytes
+		
+		//encode image into base64 then decode into ascii
+		
+		//build a content json with src, labels and width
+		
+		
+//		return "";
+		return pane("image", uid, title, content);
+}
 
 //	public static String mesh(String uid, String title, String content){
 //		return pane("mesh", uid, title, content);
 //	}
 //
-//	public static String image(String uid, String title, String content){
-//		return pane("image", uid, title, content);
-//	}
+
 //
 //	public static String isosurface(String uid, String title, String content){
 //		return pane("isosurface", uid, title, content);

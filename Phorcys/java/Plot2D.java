@@ -1,4 +1,3 @@
-import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
@@ -42,31 +41,6 @@ public class Plot2D {
 	}
 	
 	public String toJsonString(){
-//		JsonObject jobj = new JsonObject();
-//		JsonArray mainJson = new JsonArray();
-//		JsonArray jsonLabels = new JsonArray();
-//		int max = 0;
-//		for (int i = 0; i < points.length; i++){
-//			jsonLabels.add(points[i].getLabel());
-//			if (points[i].size() > max) {
-//				max = points[i].size();
-//			}
-//		}
-//		
-//		JsonArray tmpJsonArray;
-//		for (int i = 0; i < max; i++){
-//			tmpJsonArray = new JsonArray();
-//			for (int j = 0; j < points.length; j++){
-//				tmpJsonArray.add(points[j].getPointAt(i));
-//			}
-//			mainJson.add(new JsonArray(tmpJsonArray));
-//		}
-//		
-//		jobj.add("labels",jsonLabels);
-//		jobj.add("xlabel", xLabel);
-//		jobj.add("file", mainJson);
-//		
-//		return jobj.toString().replace("\\\\","").replace("\\", "");
 		return getJson().toString();
 	}
 	
@@ -95,6 +69,6 @@ public class Plot2D {
 		jobj.add("xlabel", xLabel);
 		jobj.add("file", mainJson);
 		
-		return jobj;//.toString().replace("\\\\","").replace("\\", "");
+		return jobj;
 	}
 }
