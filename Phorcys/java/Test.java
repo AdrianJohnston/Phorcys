@@ -64,7 +64,7 @@ public class Test {
 		//Network Graph testing
 		Graph testGraph = new Graph();
 		//Add test nodes
-		for (int i = 0; i < 20; i++){
+		for (int i = 0; i < 10; i++){
 			testGraph.addNewNode(new Node("Node"+i,0,0,i));
 		}
 		
