@@ -6,14 +6,14 @@ public class Plot2D {
 	String[] labels; 
 	String xLabel;
 	String yLabel;
-	Vector2[] points;	
+	Vector[] points;	
 	int numberOfLines = 0;
 	
 	public Plot2D(String... strings){
 		labels = strings;
-		points = new Vector2[strings.length];
+		points = new Vector[strings.length];
 		for (int i = 0; i < strings.length; i++){
-			points[i] = new Vector2(strings[i]);
+			points[i] = new Vector(strings[i]);
 		}
 	}
 	

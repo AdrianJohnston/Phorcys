@@ -784,6 +784,75 @@ Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
 
 });
 
+function NetworkPane(id){
+  Pane.call(this,id);
+
+  var self = this;
+  var content = this.content;
+  var visualisation = document.createElement('div'); //is this correct?
+  visualisation.id = "networkVisualisation"; //is this correct?
+  content.appendChild(visualisation);
+
+
+  //Specify options
+  this.options = {
+    autoResize: false
+    // height: '100%',
+    // width: '100%',
+    // // locale: 'en',
+    // // locales: locales,
+    // clickToUse: false
+  };
+  // this.options = {};
+
+  this.network = new vis.Network(visualisation);
+  this.network.setOptions(this.options);
+}
+
+NetworkPane.prototype = extend(Object.create(Pane.prototype), {
+  setContent: function(opts) {
+    var nodes = new vis.DataSet();
+    var edges = new vis.DataSet();
+
+    //Parse nodes first
+    var nodesList = opts.nodes;
+    for (var i = nodesList.length - 1; i >= 0; i--) {
+      nodes.add({id:nodesList[i].id,label:nodesList[i].label})
+      console.log("IIID"+nodesList[i].id);
+    }
+
+    //Parse edges
+    var edgesList = opts.edges;
+    for (var i = edgesList.length - 1; i >= 0; i--) {
+      edges.add({from:edgesList[i].from,to:edgesList[i].to})
+    }
+
+    // var nodes = new vis.DataSet([
+    //     {id: 1, label: 'Node 1'},
+    //     {id: 2, label: 'Node 2'},
+    //     {id: 3, label: 'Node 3'},
+    //     {id: 4, label: 'Node 4'},
+    //     {id: 5, label: 'Node 5'}
+    // ]);
+
+    // var edges = new vis.DataSet([
+    //     {from: 1, to: 3},
+    //     {from: 1, to: 2},
+    //     {from: 2, to: 4},
+    //     {from: 2, to: 5}
+    // ]);
+
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    
+    // console.log(JSON.stringify(opts.nodes));
+
+    this.network.setData(data);
+  }
+});
+
 ///////////////////
 // Display "server"
 
@@ -795,6 +864,7 @@ var PaneTypes = {
   mesh: MeshPane,
   isosurface: IsosurfacePane,
   graph3d: Graph3DPane,
+  network: NetworkPane
 }
 
 var Commands = {

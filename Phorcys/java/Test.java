@@ -60,5 +60,17 @@ public class Test {
 //		} catch(Exception e){
 //			e.printStackTrace();
 //		}
+		
+		//Network Graph testing
+		Graph testGraph = new Graph();
+		//Add test nodes
+		for (int i = 0; i < 20; i++){
+			testGraph.addNewNode(new Node("Node"+i,0,0,i));
+		}
+		
+		//Add test edges
+		testGraph.connectRandomNodes(50);
+//		System.out.println(testGraph.toJson().toString());
+		String ntwrk_win = API.networkGraph(null, "network test", testGraph.toJson());
 	}
 }

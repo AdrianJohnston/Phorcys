@@ -111,6 +111,10 @@ public class API{
 	public static String graph3D(String uid, String title, Graph3D graph3d){				
 		return pane("graph3d",uid, title, graph3d.getJson());
 	}
+	
+	public static String networkGraph(String uid, String title, JsonValue content){
+		return pane("network",uid,title,content);
+	}
 
 //	public static String mesh(String uid, String title, String content){
 //		return pane("mesh", uid, title, content);

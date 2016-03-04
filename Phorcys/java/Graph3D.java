@@ -7,14 +7,14 @@ public class Graph3D {
 	String xLabel;
 	String yLabel;
 	String zLabel;
-	Vector2[] points;	
+	Vector[] points;	
 	int numberOfLines = 0;
 	
 	public Graph3D(String... strings){
 		labels = strings;
-		points = new Vector2[strings.length];
+		points = new Vector[strings.length];
 		for (int i = 0; i < strings.length; i++){
-			points[i] = new Vector2(strings[i]);
+			points[i] = new Vector(strings[i]);
 		}
 	}
 	
