@@ -5,7 +5,7 @@ public class Test {
 	static Random rand = new Random();
 	public static void main(String[] args){
 		
-		//Text box testing
+//		//Text box testing
 //		try {
 //			String txt_win = API.text("", "JAVA TEXT BOX", "HELLO BANANA FACE");
 //			Thread.sleep(5000);
@@ -33,14 +33,32 @@ public class Test {
 //		} catch(Exception e){
 //			e.printStackTrace();
 //		}
+//		
+//		
+//		//Image testing
+//		//This loads an image from file and sends it to the server
+//		//Load image from args[0]
+//		PNG png = new PNG(args[0]);
+//		System.out.println(args[0]);
+//		png.setLabels("testsss");
+//		String img_win = API.image(null, "IMAGE TEST YO", png.toJson());
 		
 		
-		//Image testing
-		//This loads an image from file and sends it to the server
-		//Load image from args[0]
-		PNG png = new PNG(args[0]);
-		System.out.println(args[0]);
-		png.setLabels("testsss");
-		String img_win = API.image(null, "IMAGE TEST YO", png.toJson());
+//		//Graph3D testing
+//		try {
+//			Graph3D testPlot = new Graph3D("position","a","b"); //mimic the example.py
+//			testPlot.setXLabel("Position");
+//			for (int i = 0; i < 500; i++){
+//				testPlot.addPoints(i,rand.nextDouble()*100,rand.nextDouble()*25);
+//			}
+//			String txt_graph3D = API.graph3D(null, "JAVA GRAPH3d",testPlot);
+//			for (int i = 500; i < 40; i++){
+//				testPlot.addPoints(i,rand.nextDouble()*87,rand.nextDouble()*35);
+//			}
+//			Thread.sleep(5000);
+//			API.graph3D(txt_graph3D, "JAVA GRAPH3d Test",testPlot);
+//		} catch(Exception e){
+//			e.printStackTrace();
+//		}
 	}
 }

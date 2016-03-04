@@ -105,22 +105,12 @@ public class API{
 	}
 	
 	public static String image(String uid, String title, JsonValue content){
-		//Check dimensions are okay
-		
-		//If image is a list of images, uses images instead
-		
-		//normalise and to_rgb img
-
-		//get image as bytes
-		
-		//encode image into base64 then decode into ascii
-		
-		//build a content json with src, labels and width
-		
-		
-//		return "";
 		return pane("image", uid, title, content);
-}
+	}
+	
+	public static String graph3D(String uid, String title, Graph3D graph3d){				
+		return pane("graph3d",uid, title, graph3d.getJson());
+	}
 
 //	public static String mesh(String uid, String title, String content){
 //		return pane("mesh", uid, title, content);
