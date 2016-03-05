@@ -62,15 +62,24 @@ public class Test {
 //		}
 		
 		//Network Graph testing
-		Graph testGraph = new Graph();
-		//Add test nodes
-		for (int i = 0; i < 10; i++){
-			testGraph.addNewNode(new Node("Node"+i,0,0,i));
+//		Graph testGraph = new Graph();
+//		//Add test nodes
+//		for (int i = 0; i < 10; i++){
+//			testGraph.addNewNode(new Node("Node"+i,0,0,i));
+//		}
+//		
+//		//Add test edges
+//		testGraph.connectRandomNodes(50);
+//		String ntwrk_win = API.networkGraph(null, "network test", testGraph.toJson());
+		
+		
+		//Mesh testing
+		Mesh mesh = new Mesh();
+		int dummyEntities = 100;
+		for (int i = 0; i < dummyEntities; i++){
+			mesh.addEntity("ent_i", Utilities.generateRandomDouble(), Utilities.generateRandomDouble(), Utilities.generateRandomDouble());
 		}
 		
-		//Add test edges
-		testGraph.connectRandomNodes(50);
-//		System.out.println(testGraph.toJson().toString());
-		String ntwrk_win = API.networkGraph(null, "network test", testGraph.toJson());
+		String mesh_win = API.mesh(null, "mesh test", mesh.toJson());
 	}
 }

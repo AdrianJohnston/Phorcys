@@ -116,9 +116,9 @@ public class API{
 		return pane("network",uid,title,content);
 	}
 
-//	public static String mesh(String uid, String title, String content){
-//		return pane("mesh", uid, title, content);
-//	}
+	public static String mesh(String uid, String title, JsonValue content){
+		return pane("mesh", uid, title, content);
+	}
 //
 
 //

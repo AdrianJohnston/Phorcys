@@ -68,6 +68,9 @@ public class Utilities {
 	public static float generateRandomFloat(){
 		return random.nextFloat();
 	}
+	public static double generateRandomDouble(){
+		return random.nextDouble();
+	}
 	
 	public static Vector2 randomiseVectorDouble(double xMin, double xMax, double yMin, double yMax){	
 		double X = generateRandomRangeDouble(xMin, xMax);

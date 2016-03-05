@@ -597,7 +597,6 @@ function MeshPane(id) {
     var height = 400;
 
     function init(element) {
-
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera( 75, width / height, 1, 10000 );
@@ -607,24 +606,24 @@ function MeshPane(id) {
 
         controls = new THREE.OrbitControls( camera, renderer.domElement );
         //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-		controls.enableDamping = true;
-		controls.dampingFactor = 0.25;
-		controls.enableZoom = true;
+    		controls.enableDamping = true;
+    		controls.dampingFactor = 0.25;
+    		controls.enableZoom = true;
 
         var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
         var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
 
-        for ( var i = 0; i < 500; i ++ ) {
+        // for ( var i = 0; i < 500; i ++ ) {
+        //     var mesh = new THREE.Mesh( geometry, material );
+        //     mesh.position.x = ( Math.random() - 0.5 ) * 1000;
+        //     mesh.position.y = ( Math.random() - 0.5 ) * 1000;
+        //     mesh.position.z = ( Math.random() - 0.5 ) * 1000;
+            
+        //     mesh.updateMatrix();
+        //     mesh.matrixAutoUpdate = false;
+        //     scene.add( mesh );
 
-            var mesh = new THREE.Mesh( geometry, material );
-            mesh.position.x = ( Math.random() - 0.5 ) * 1000;
-            mesh.position.y = ( Math.random() - 0.5 ) * 1000;
-            mesh.position.z = ( Math.random() - 0.5 ) * 1000;
-            mesh.updateMatrix();
-            mesh.matrixAutoUpdate = false;
-            scene.add( mesh );
-
-        }
+        // }
 
         // lights
 
@@ -686,8 +685,25 @@ function MeshPane(id) {
 }
 
 MeshPane.prototype = extend(Object.create(Pane.prototype), {
-  setContent: function(txt) {
+  setContent: function(opts) {
+    var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+    var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
     //this.content.innerHTML = txt;
+    console.log("OWMEOWMEOWMOE");
+    for ( var i = 0; i < 500; i ++ ) {
+      var mesh = new THREE.Mesh( geometry, material );
+      mesh.position.x = ( Math.random() - 0.5 ) * 1000;
+      mesh.position.y = ( Math.random() - 0.5 ) * 1000;
+      mesh.position.z = ( Math.random() - 0.5 ) * 1000;
+      
+      mesh.updateMatrix();
+      mesh.matrixAutoUpdate = false;
+      scene.add( mesh );
+
+    }
+
+    animate();
+    render();
   },
 });
 
@@ -751,21 +767,14 @@ Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
     var in_arr = opts.file;
     var length = in_arr.length;
     var num_channels = in_arr[0].length;
-    //for (var x =0 ;x < )
 
-    //for (var x = 0; x < axisMax; x+=axisStep) {
-    //    for (var y = 0; y < axisMax; y+=axisStep) {
-    //        var value = (Math.sin(x/50) * Math.cos(y/50) * 50 + 50);
-    //        data.add({id:counter++,x:x,y:y,z:value,style:value});
-    //    }
-    //}
-      for(var i =0 ; i < length; i++) {
+    for(var i =0 ; i < length; i++) {
 
-          var x = in_arr[i][0];
-          var y = in_arr[i][1];
-          var z = in_arr[i][2];
-          data.add({id:i,x:x,y:y,z:z,style:z})
-      }
+        var x = in_arr[i][0];
+        var y = in_arr[i][1];
+        var z = in_arr[i][2];
+        data.add({id:i,x:x,y:y,z:z,style:z})
+    }
 
     //data.add(opts.file);
     console.log(JSON.stringify(opts));
@@ -773,6 +782,7 @@ Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
     console.log(JSON.stringify(this.options));
     console.log(length.toString());
     console.log(num_channels.toString());
+
     this.graph3d.setData(data);
     //this.graph3d._setOption(this.options)
   },
@@ -818,7 +828,6 @@ NetworkPane.prototype = extend(Object.create(Pane.prototype), {
     var nodesList = opts.nodes;
     for (var i = nodesList.length - 1; i >= 0; i--) {
       nodes.add({id:nodesList[i].id,label:nodesList[i].label})
-      console.log("IIID"+nodesList[i].id);
     }
 
     //Parse edges
@@ -827,27 +836,10 @@ NetworkPane.prototype = extend(Object.create(Pane.prototype), {
       edges.add({from:edgesList[i].from,to:edgesList[i].to})
     }
 
-    // var nodes = new vis.DataSet([
-    //     {id: 1, label: 'Node 1'},
-    //     {id: 2, label: 'Node 2'},
-    //     {id: 3, label: 'Node 3'},
-    //     {id: 4, label: 'Node 4'},
-    //     {id: 5, label: 'Node 5'}
-    // ]);
-
-    // var edges = new vis.DataSet([
-    //     {from: 1, to: 3},
-    //     {from: 1, to: 2},
-    //     {from: 2, to: 4},
-    //     {from: 2, to: 5}
-    // ]);
-
     var data = {
       nodes: nodes,
       edges: edges
     };
-    
-    // console.log(JSON.stringify(opts.nodes));
 
     this.network.setData(data);
   }
