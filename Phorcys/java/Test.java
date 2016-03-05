@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 public class Test {
@@ -43,6 +44,19 @@ public class Test {
 //		png.setLabels("testsss");
 //		String img_win = API.image(null, "IMAGE TEST YO", png.toJson());
 		
+		//Generated Image Testing
+		PNG png = new PNG(20, 20);
+		png.setLabels("OLOLOLO");
+		String imgg_win = API.image(null,"GEN IMAGE",png.toJson());
+		for (int i = 0; i < 1000; i++){
+			png.golTEST();
+			API.image(imgg_win,"Small Game Of Life",png.toJson());
+		}
+		
+		
+		
+		
+		
 		
 //		//Graph3D testing
 //		try {
@@ -74,12 +88,12 @@ public class Test {
 		
 		
 		//Mesh testing
-		Mesh mesh = new Mesh();
-		int dummyEntities = 100;
-		for (int i = 0; i < dummyEntities; i++){
-			mesh.addEntity("ent_i", Utilities.generateRandomDouble(), Utilities.generateRandomDouble(), Utilities.generateRandomDouble());
-		}
-		
-		String mesh_win = API.mesh(null, "mesh test", mesh.toJson());
+//		Mesh mesh = new Mesh();
+//		int dummyEntities = 100;
+//		for (int i = 0; i < dummyEntities; i++){
+//			mesh.addEntity("ent_i", Utilities.generateRandomDouble(), Utilities.generateRandomDouble(), Utilities.generateRandomDouble());
+//		}
+//		
+//		String mesh_win = API.mesh(null, "mesh test", mesh.toJson());
 	}
 }

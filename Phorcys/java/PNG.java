@@ -14,7 +14,7 @@ import com.eclipsesource.json.JsonValue;
 import javax.imageio.ImageIO;
 
 public class PNG {
-//	int[][][] img;
+	int[] img;
 	BufferedImage imgFile;
 	
 	String[] labels;
@@ -30,13 +30,52 @@ public class PNG {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}	
+	}
+	
+	public PNG(int w, int h){
+		width = w;
+		height = h;
+		img = new int[(int)width*(int)height];
+		golTEST();
+	}
+	
+	public void createImage(){
+		int incr = 0;
+		for (int i = 0; i < width; i++){
+			for (int j = 0; j < height; j++){				
+				img[incr] = rgbToInt(Utilities.generateRandomRangeInteger(0, 255), Utilities.generateRandomRangeInteger(0, 255), Utilities.generateRandomRangeInteger(0, 255));
+				incr++;
+			}
 		}
+		imgFile = new BufferedImage((int)width, (int)height, BufferedImage.TYPE_INT_RGB);
+		imgFile.setRGB(0, 0, (int)width, (int)height, img, 0, (int)width);
+	}
+	
+	public void golTEST(){
+		int incr = 0;
+		for (int i = 0; i < width; i++){
+			for (int j = 0; j < height; j++){				
+				if (Utilities.generateCoinFlip()){
+					img[incr] = rgbToInt(0,0,0);
+				} else {
+					img[incr] = rgbToInt(255,255,255);
+				}
+				incr++;
+			}
+		}
+		imgFile = new BufferedImage((int)width, (int)height, BufferedImage.TYPE_INT_RGB);
+		imgFile.setRGB(0, 0, (int)width, (int)height, img, 0, (int)width);
+	}
+	
+	public int rgbToInt(int r, int g, int b){
+		return (r << 16) | (g << 8) | b;
 	}
 	
 	public PNG(BufferedImage img){
 		this.imgFile = img;
 	}
-	
+
 	public void setLabels(String...labels){
 		this.labels = labels;
 	}
