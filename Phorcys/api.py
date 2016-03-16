@@ -127,8 +127,7 @@ def mesh(data, **opts):
 
 
 def isosurface(data, **opts):
-	#return pane('text', opts.get('win'), opts.get('title'), content=data)
-	raise Exception('Not implemented')
+	return pane('isosurface', opts.get('win'), opts.get('title'), content=data)
 
 
 def graph3d(data, **opts):

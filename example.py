@@ -60,7 +60,7 @@ data = generate_3D_grid(steps, axisMax)
 
 print (data.shape)
 
-win2 = graph3d(data, labels=[ 'position', 'a', 'b' ], title='progress')
+#win2 = graph3d(data, labels=[ 'position', 'a', 'b' ], title='progress')
 
 ##Need to have id, label, from, and to tags....
 def networkExample(numberOfNodes):
@@ -80,3 +80,4 @@ def networkExample(numberOfNodes):
 	ntwk_win = networkGraph(data,labels=[],title='networkTest_python')
 
 networkExample(10)
+isosurface([],title='isosurface')
