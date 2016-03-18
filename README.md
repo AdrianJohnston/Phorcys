@@ -1,4 +1,6 @@
 # Phorcys: a browser-based graphics server
+
+[![Join the chat at https://gitter.im/AdrianJohnston/Phorcys](https://badges.gitter.im/AdrianJohnston/Phorcys.svg)](https://gitter.im/AdrianJohnston/Phorcys?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Phorcys (pronounced /ˈfɔːrsᵻs/, "forceus"), a god of the hidden changes of the deep.
 
 Originally forked from [display](https://github.com/szym/display) which was forked from [gfx.js](https://github.com/clementfarabet/gfx.js/).
