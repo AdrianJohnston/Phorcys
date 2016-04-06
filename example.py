@@ -86,6 +86,9 @@ def networkExample(numberOfNodes):
 networkExample(10)
 
 vol = np.zeros((36,36,36))
-vol[9:27, 9:27, 9:27] = 1
+vol[9:27, 9:27, 9:27] = -1
 
+vol[15:27, 15:27, 15:27] = 0
+
+# vol[10:26, 10:26, 10:26] =
 isosurface(vol,title='isosurface')

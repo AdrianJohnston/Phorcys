@@ -598,6 +598,9 @@ function MeshPane(id) {
     var width  = 400;
     var height = 400;
 
+    this.element.style.height = height + 'px';
+    this.element.style.width = width + 'px';
+
     function init(element) {
 
         camera = new THREE.PerspectiveCamera( 75, width / height, 1, 10000 );
@@ -692,7 +695,6 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
     var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
     var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
     //this.content.innerHTML = txt;
-    console.log("OWMEOWMEOWMOE");
     for ( var i = 0; i < 500; i ++ ) {
       var mesh = new THREE.Mesh( geometry, material );
       mesh.position.x = ( Math.random() - 0.5 ) * 1000;
@@ -720,10 +722,13 @@ function IsosurfacePane(id) {
     var camera, renderer, stats;
     var geometry, material, mesh;
     var light, controls;
-    var width  = 400;
-    var height = 400;
+    var width  = 600;
+    var height = 600;
     this.scene = new THREE.Scene();
     var scene = this.scene;
+
+    this.element.style.height = height + 'px';
+    this.element.style.width = width + 'px';
 
     var VIEW_ANGLE = 45, ASPECT = width / height, NEAR = 0.1, FAR = 20000;
     camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
@@ -742,13 +747,26 @@ function IsosurfacePane(id) {
     controls = new THREE.OrbitControls( camera, renderer.domElement );
 
     // LIGHT
-    light = new THREE.PointLight(0xffffff);
-    light.position.set(0,10,0);
+    light = new THREE.PointLight(0xcccccc);
+    light.position.set(50,50,50);
+
+    var ambientLight = new THREE.AmbientLight( 0x303030 );
+    scene.add( ambientLight );
+
     this.scene.add(light);
 
     this.scene.add( new THREE.AxisHelper(100) );
     content.appendChild( renderer.domElement );
 
+    function onWindowResize() {
+
+        self.width = content.clientWidth;
+        self.height = content.clientHeight;
+        camera.aspect = width / height;
+
+        camera.updateProjectionMatrix();
+        renderer.setSize( self.width, self.height );
+    }
 
     function animate() {
         requestAnimationFrame( animate );
@@ -761,6 +779,10 @@ function IsosurfacePane(id) {
 
     render();
     animate();
+    on(content, 'mousedown', function(ev) {
+        onWindowResize();
+    });
+
 }
 
 IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
@@ -789,16 +811,13 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
         for (var j = 0; j < size; j++)
         for (var i = 0; i < size; i++)
         {
-            // actual values
+            // actual values - centres the object
             var x = axisMin + axisRange * i / (size - 1);
             var y = axisMin + axisRange * j / (size - 1);
             var z = axisMin + axisRange * k / (size - 1);
 
             points.push( new THREE.Vector3(x,y,z) );
-
-            //var value = x*x + y*y - z*z - 25;
-            //console.log(value);
-            var value = x*x - z*z;
+            var value = data[i][j][k];
             values.push( value );
         }
 
@@ -813,6 +832,7 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
 
         var geometry = new THREE.Geometry();
         var vertexIndex = 0;
+        var isolevel = 0;
 
         //Move this into a Marching Cubes function??
         for (var z = 0; z < size - 1; z++)
@@ -842,7 +862,6 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
             // place a "1" in bit positions corresponding to vertices whose
             //   isovalue is less than given constant.
 
-            var isolevel = 0;
 
             var cubeindex = 0;
             if ( value0 < isolevel ) cubeindex |= 1;
