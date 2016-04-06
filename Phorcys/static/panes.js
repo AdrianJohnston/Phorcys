@@ -702,7 +702,6 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
       mesh.updateMatrix();
       mesh.matrixAutoUpdate = false;
       this.scene.add( mesh );
-
     }
 
     //this.animate();
@@ -767,16 +766,22 @@ function IsosurfacePane(id) {
 IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
   setContent: function(opts) {
 
-      var points = [];
+        var points = [];
         var values = [];
         var size;
 
+        console.log("ISOSURFACE Options");
+        //console.log(JSON.stringify(opts));
        // number of cubes along a side - This should be computed and send along with the data
-        size = 36;
+
+      var data = opts.file;
+      //console.log();
+
+      size = data.length;
 
       //Same with this
-        var axisMin = -18;
-        var axisMax =  18;
+        var axisMin = -(size/2);
+        var axisMax =  size/2;
         var axisRange = axisMax - axisMin;
 
         // Generate a list of 3D points and values at those points - This is the data
@@ -788,8 +793,12 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
             var x = axisMin + axisRange * i / (size - 1);
             var y = axisMin + axisRange * j / (size - 1);
             var z = axisMin + axisRange * k / (size - 1);
+
             points.push( new THREE.Vector3(x,y,z) );
-            var value = x*x + y*y - z*z - 25;
+
+            //var value = x*x + y*y - z*z - 25;
+            //console.log(value);
+            var value = x*x - z*z;
             values.push( value );
         }
 
@@ -805,6 +814,7 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
         var geometry = new THREE.Geometry();
         var vertexIndex = 0;
 
+        //Move this into a Marching Cubes function??
         for (var z = 0; z < size - 1; z++)
         for (var y = 0; y < size - 1; y++)
         for (var x = 0; x < size - 1; x++)
@@ -946,7 +956,6 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
             }
         }
 
-        //geometry.computeCentroids();
         geometry.computeFaceNormals();
         geometry.computeVertexNormals();
 

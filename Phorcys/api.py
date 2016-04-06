@@ -127,7 +127,10 @@ def mesh(data, **opts):
 
 
 def isosurface(data, **opts):
-	return pane('isosurface', opts.get('win'), opts.get('title'), content=data)
+	options = dict()
+	options['file'] = data.tolist()
+	options['size'] = data.shape[0]
+	return pane('isosurface', opts.get('win'), opts.get('title'), content=options)
 
 
 def graph3d(data, **opts):
