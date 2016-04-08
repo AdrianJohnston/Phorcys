@@ -8,8 +8,8 @@
 	//Implement a UID generator [√]
 	/**Panes**/
 	//Text [√]
-	//Image []
-	//Plot2D []
+	//Image [√]
+	//Plot2D [√]
 	//Plot3D []
 	//Mesh []
 	//IsoSurface []
@@ -44,7 +44,7 @@ public class API{
 	 * @param paneToSend [description]
 	 */
 	public static boolean send(PaneToSend paneToSend){
-		System.out.println("Command: " + paneToSend.toString().replace("\\",""));
+//		System.out.println("Command: " + paneToSend.toString().replace("\\",""));
 		try {
 			HttpResponse<String> response = Unirest.post(URL)
 				.header("Content-Type", "application/text")

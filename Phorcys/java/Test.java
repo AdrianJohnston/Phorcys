@@ -45,13 +45,14 @@ public class Test {
 //		String img_win = API.image(null, "IMAGE TEST YO", png.toJson());
 		
 		//Generated Image Testing
-		PNG png = new PNG(20, 20);
+		PNG png = new PNG(30, 30);
+		png.createImage();
 		png.setLabels("OLOLOLO");
 		String imgg_win = API.image(null,"GEN IMAGE",png.toJson());
-		for (int i = 0; i < 1000; i++){
-			png.golTEST();
-			API.image(imgg_win,"Small Game Of Life",png.toJson());
-		}
+//		for (int i = 0; i < 1000; i++){
+//			png.golTEST();
+//			API.image(imgg_win,"Small Game Of Life",png.toJson());
+//		}
 		
 		
 		
@@ -88,12 +89,24 @@ public class Test {
 		
 		
 		//Mesh testing
-//		Mesh mesh = new Mesh();
-//		int dummyEntities = 100;
-//		for (int i = 0; i < dummyEntities; i++){
-//			mesh.addEntity("ent_i", Utilities.generateRandomDouble(), Utilities.generateRandomDouble(), Utilities.generateRandomDouble());
-//		}
-//		
-//		String mesh_win = API.mesh(null, "mesh test", mesh.toJson());
+		Mesh mesh = new Mesh();
+		int dummyEntities = 1000;
+		for (int i = 0; i < dummyEntities; i++){
+			mesh.addEntity("ent_"+i, Utilities.generateRandomDouble()-0.5, Utilities.generateRandomDouble()-0.5, Utilities.generateRandomDouble()-0.5);
+		}
+		
+		String mesh_win = API.mesh(null, "mesh test", mesh.toJson());
+		
+		
+		for (int i = 0; i < 50; i++){
+			mesh.shiftEntity(-0.05, 0.05);
+			API.mesh(mesh_win, "mesh test", mesh.toJson());
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
