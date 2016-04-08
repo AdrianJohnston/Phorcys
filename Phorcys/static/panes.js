@@ -605,7 +605,8 @@ function MeshPane(id) {
 
         camera = new THREE.PerspectiveCamera( 75, width / height, 1, 10000 );
         camera.position.z = 1000;
-        renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setClearColor(0xffffff,1); //White BG
         renderer.setSize( width, height );
 
         controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -616,18 +617,6 @@ function MeshPane(id) {
 
         var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
         var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
-
-        // for ( var i = 0; i < 500; i ++ ) {
-        //     var mesh = new THREE.Mesh( geometry, material );
-        //     mesh.position.x = ( Math.random() - 0.5 ) * 1000;
-        //     mesh.position.y = ( Math.random() - 0.5 ) * 1000;
-        //     mesh.position.z = ( Math.random() - 0.5 ) * 1000;
-            
-        //     mesh.updateMatrix();
-        //     mesh.matrixAutoUpdate = false;
-        //     scene.add( mesh );
-
-        // }
 
         // lights
 
@@ -707,7 +696,7 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
         var currObj = this.scene.getObjectByName(in_arr[i][0]);
         if (currObj == null){
           var mesh = new THREE.Mesh(geometry, material);
-          mesh.name = in_arr[i][0]; //I wonder if this works
+          mesh.name = in_arr[i][0]; 
           mesh.position.x = in_arr[i][1] * 1000;
           mesh.position.y = in_arr[i][2] * 1000;
           mesh.position.z = in_arr[i][3] * 1000;

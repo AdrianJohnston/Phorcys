@@ -35,7 +35,7 @@ public class Mesh {
 	}
 	
 	//DEBUG
-	public void shiftEntity(double min, double max){
+	public void shiftEntities(double min, double max){
 		for (MeshEntity me : entities){
 			me.setX(me.getX() + Utilities.generateRandomRangeDouble(min, max));
 			me.setY(me.getY() + Utilities.generateRandomRangeDouble(min, max));
