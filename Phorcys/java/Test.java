@@ -90,7 +90,7 @@ public class Test {
 		
 		//Mesh testing
 		Mesh mesh = new Mesh();
-		int dummyEntities = 1000;
+		int dummyEntities = 10000;
 		for (int i = 0; i < dummyEntities; i++){
 			mesh.addEntity("ent_"+i, Utilities.generateRandomDouble()-0.5, Utilities.generateRandomDouble()-0.5, 0);
 		}
@@ -108,12 +108,12 @@ public class Test {
 			mesh.shiftEntities(-0.05, 0.05);
 			API.mesh(mesh_win, "mesh test", mesh.toJson());
 			API.text(count_win, "Current Step", "Step "+i);
-			try {
-				Thread.sleep(800);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(800);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		
 
