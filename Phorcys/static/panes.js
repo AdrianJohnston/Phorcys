@@ -8,7 +8,7 @@
 
 ///////////////////
 // Global Elements
-
+'use strict';
 var document = this.document
   , window = this
   , root
@@ -26,9 +26,13 @@ function off(el, type, handler, capture) {
 }
 
 function cancel(ev) {
-  if (ev.preventDefault) ev.preventDefault();
+  if (ev.preventDefault) {
+    ev.preventDefault();
+  }
   ev.returnValue = false;
-  if (ev.stopPropagation) ev.stopPropagation();
+  if (ev.stopPropagation) {
+    ev.stopPropagation();
+  }
   ev.cancelBubble = true;
   return false;
 }
@@ -433,7 +437,7 @@ ImagePane.prototype = extend(Object.create(Pane.prototype), {
       , content = this.content;
 
     var delta = (ev.deltaMode === ev.DOM_DELTA_PIXEL) ? ev.deltaY : ev.deltaY * 40;
-    var scale = Math.exp(delta / 800.);
+    var scale = Math.exp(delta / 800.0);
 
     // Don't shrink below 100px.
     if (content.offsetWidth * scale < 100) scale = 100 / content.offsetWidth;
@@ -611,9 +615,9 @@ function MeshPane(id) {
 
         controls = new THREE.OrbitControls( camera, renderer.domElement );
         //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-    		controls.enableDamping = true;
-    		controls.dampingFactor = 0.25;
-    		controls.enableZoom = true;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
 
         var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
         var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
@@ -684,24 +688,22 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
     var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
     var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
     //this.content.innerHTML = txt;
-    //
-        
 
     if (opts.file.length > 0){
 
       var in_arr = opts.file;
       var length = in_arr.length;
-  
+
       for (var i = 0; i < length; i++){
         var currObj = this.scene.getObjectByName(in_arr[i][0]);
         if (currObj == null){
           var mesh = new THREE.Mesh(geometry, material);
-          mesh.name = in_arr[i][0]; 
+          mesh.name = in_arr[i][0];
           mesh.position.x = in_arr[i][1] * 1000;
           mesh.position.y = in_arr[i][2] * 1000;
           mesh.position.z = in_arr[i][3] * 1000;
           // console.log("mesh x,y,z" + in_arr[i][1]+","+in_arr[i][2]+","+in_arr[i][3]);
-          
+
           mesh.updateMatrix();
           mesh.matrixAutoUpdate = false;
           this.scene.add( mesh );
@@ -714,14 +716,14 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
           currObj.matrixAutoUpdate = false;
         }
       }
-      
+
     } else {
       for ( var i = 0; i < 500; i ++ ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.x = ( Math.random() - 0.5 ) * 1000;
         mesh.position.y = ( Math.random() - 0.5 ) * 1000;
         mesh.position.z = ( Math.random() - 0.5 ) * 1000;
-        
+
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
