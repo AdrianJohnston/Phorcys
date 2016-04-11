@@ -520,7 +520,7 @@ function getTickResolution(graph) {
   return Math.floor(Math.log10(tickSize));
 }
 
-
+//TODO: Remove DyGraph dependency and replace with visJS
 function PlotPane(id) {
   Pane.call(this, id);
 
@@ -623,7 +623,6 @@ function MeshPane(id) {
         var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
 
         // lights
-
         light = new THREE.DirectionalLight( 0xffffff );
         light.position.set( 1, 1, 1 );
         scene.add( light );
@@ -645,7 +644,6 @@ function MeshPane(id) {
         self.scene = scene;
         self.camera = camera;
         element.appendChild( renderer.domElement );
-
     }
 
     function onWindowResize() {
@@ -667,8 +665,6 @@ function MeshPane(id) {
     function render() {
         renderer.render( scene, camera );
     }
-
-
 
     init(content);
     animate();
@@ -718,7 +714,8 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
       }
 
     } else {
-      for ( var i = 0; i < 500; i ++ ) {
+      console.log("No data has been passed to MeshPane."); //Get Pane name??
+/*      for ( var i = 0; i < 500; i ++ ) {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.x = ( Math.random() - 0.5 ) * 1000;
         mesh.position.y = ( Math.random() - 0.5 ) * 1000;
@@ -727,7 +724,7 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
         mesh.updateMatrix();
         mesh.matrixAutoUpdate = false;
         this.scene.add( mesh );
-      }
+      }*/
     }
     //this.animate();
     //this.render();
@@ -1078,6 +1075,7 @@ Graph3DPane.prototype = extend(Object.create(Pane.prototype), {
 
 });
 
+//TODO: Make this look nicer, may have something to do with JSON type being passed
 function NetworkPane(id){
   Pane.call(this,id);
 
