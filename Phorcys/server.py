@@ -92,7 +92,7 @@ def subscribe():
 
 class DisplayServer():
 
-    def __init__(self, url="", port=5000):
+    def __init__(self, url="", port=8000):
         app.debug = True
         print("Starting Server on", url+":"+str(port))
         server = WSGIServer((url, port), app)

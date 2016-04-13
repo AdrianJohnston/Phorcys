@@ -23,7 +23,9 @@ import png
 
 __all__ = ['URL', 'image', 'images', 'plot', 'text', 'mesh', 'isosurface', 'graph3d','networkGraph']
 
-URL = 'http://localhost:5000/events'
+
+PORT = '8000'
+URL = 'http://localhost:' + PORT + '/events'
 
 def uid():
 	return 'pane_%s' % uuid.uuid4()
