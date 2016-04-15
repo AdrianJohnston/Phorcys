@@ -1129,7 +1129,7 @@ NetworkPane.prototype = extend(Object.create(Pane.prototype), {
 
 //TODO: SimPane2D. What will this even look like
 function SimPane2D(id){
-  Pane.call(this.id;)
+  Pane.call(this.id);
 }
 SimPane2D.prototype = extend(Object.create(Pane.prototype), {
 

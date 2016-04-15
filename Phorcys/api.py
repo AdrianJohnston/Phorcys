@@ -33,7 +33,7 @@ def uid():
 
 def send(**command):
 	command = json.dumps(command)
-	print("Command" + str(command))
+	#print("Command" + str(command))
 	req = Request(URL, 'POST')
 	req.add_header('Content-Type', 'application/text')
 	req.data = command.encode('ascii')
