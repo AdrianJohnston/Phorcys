@@ -18,7 +18,7 @@ image(i1, title='gradient')
 
 print("Displaying Images")
 
-# display.images([i2, i2, i2, i2], width=200, title='super fabio', labels=['a', 'b', 'c', 'd'])
+images([i2, i2, i2, i2], width=200, title='montage', labels=['a', 'b', 'c', 'd'])
 
 data = []
 for i in range(15):

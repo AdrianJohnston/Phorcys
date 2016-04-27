@@ -50,7 +50,7 @@ def events():
         return publish()
     elif req.method == 'GET':
         print("GET OK")
-        print(subscriptions)
+        #print(subscriptions)
         return subscribe()
 
 def publish():
@@ -59,7 +59,7 @@ def publish():
     payload = request.data
     #print("Error in payload")
     try:
-        print ("Data", payload)
+        #print ("Data", payload)
         data = json.loads(request.data)
     except:
 
