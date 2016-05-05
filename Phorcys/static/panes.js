@@ -813,7 +813,7 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
         var size;
 
         console.log("ISOSURFACE Options");
-        //console.log(JSON.stringify(opts));
+        console.log(JSON.stringify(opts));
        // number of cubes along a side - This should be computed and send along with the data
 
       var data = opts.file;
@@ -852,7 +852,7 @@ IsosurfacePane.prototype = extend(Object.create(Pane.prototype), {
 
         var geometry = new THREE.Geometry();
         var vertexIndex = 0;
-        var isolevel = 0;
+        var isolevel = opts.threshold;
 
         //Move this into a Marching Cubes function??
         for (var z = 0; z < size - 1; z++)

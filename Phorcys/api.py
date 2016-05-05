@@ -23,7 +23,7 @@ else:
 
 import png
 
-__all__ = ['image', 'images', 'plot', 'text', 'mesh', 'isosurface', 'graph3d', 'networkGraph']
+__all__ = ['image', 'images', 'plot', 'text', 'mesh', 'isosurface', 'graph3d', 'networkGraph', 'volume']
 
 
 # PORT = '8000'
@@ -207,7 +207,7 @@ def volume2isosurface(vol):
     return vol * -1
 
 
-def display_volume(data, **opts):
+def volume(data, **opts):
     vol = volume2isosurface(data)
     pad = 1
     vol = np.pad(vol, pad_width=((pad, pad), (pad, pad), (pad, pad)), mode='constant', constant_values=0)
@@ -218,6 +218,8 @@ def isosurface(data, **opts):
     options = dict()
     options['file'] = data.tolist()
     options['size'] = data.shape[0]
+    options['threshold'] = 0.0 if opts.get('threshold') is None else opts.get('threshold')
+    print("Threshold:", options['threshold'])
     return pane('isosurface', opts.get('win'), opts.get('title'), content=options)
 
 
