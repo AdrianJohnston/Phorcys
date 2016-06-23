@@ -1,8 +1,8 @@
 from __future__ import print_function
 import numpy
 import random
-from Phorcys import *
-
+from Phorcys.api import *
+import time
 
 def generate_image():
   X, Y = numpy.meshgrid(numpy.linspace(0, numpy.pi, 512), numpy.linspace(0, 2, 512))
@@ -72,7 +72,7 @@ def networkExample(numberOfNodes):
 	#Create a list of nodes
 	nodes = []
 	for i in range(numberOfNodes):
-		nodes.append(["id",i,"label","Node"+`i`])
+		nodes.append(["id",i,"label","Node"+str(i)])
 
 	#Create a list of edges
 	edges = []

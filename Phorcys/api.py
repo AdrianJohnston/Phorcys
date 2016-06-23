@@ -21,7 +21,7 @@ else:
     Request = urllib.request.Request
     urlopen = urllib.request.urlopen
 
-import png
+import Phorcys.png as png
 
 __all__ = ['image', 'images', 'plot', 'text', 'mesh', 'isosurface', 'graph3d', 'networkGraph', 'volume']
 
