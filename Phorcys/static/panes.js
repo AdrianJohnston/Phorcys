@@ -681,7 +681,9 @@ function MeshPane(id) {
 
 MeshPane.prototype = extend(Object.create(Pane.prototype), {
   setContent: function(opts) {
-    var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+    // var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+    // TODO: Make the API do an init call to set geometry of things (or we can do below)
+    var geometry = new THREE.BoxGeometry(20,20,20);
     var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.FlatShading } );
     //this.content.innerHTML = txt;
 
@@ -693,17 +695,26 @@ MeshPane.prototype = extend(Object.create(Pane.prototype), {
       for (var i = 0; i < length; i++){
         var currObj = this.scene.getObjectByName(in_arr[i][0]);
         if (currObj == null){
-          var mesh = new THREE.Mesh(geometry, material);
+          var mesh;
+          if (in_arr[i][4] != null){
+            mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial( { color:new THREE.Color(in_arr[i][4]), shading: THREE.FlatShading } ) );
+          } else {
+            mesh = new THREE.Mesh(geometry, material);
+          }
           mesh.name = in_arr[i][0];
           mesh.position.x = in_arr[i][1] * 1000;
           mesh.position.y = in_arr[i][2] * 1000;
           mesh.position.z = in_arr[i][3] * 1000;
+
           // console.log("mesh x,y,z" + in_arr[i][1]+","+in_arr[i][2]+","+in_arr[i][3]);
 
           mesh.updateMatrix();
           mesh.matrixAutoUpdate = false;
           this.scene.add( mesh );
         } else {
+          if (in_arr[i][4] != null){
+            currObj.material = new THREE.MeshPhongMaterial( { color:new THREE.Color(in_arr[i][4]), shading: THREE.FlatShading } );
+          } 
           currObj.position.x = in_arr[i][1] * 1000;
           currObj.position.y = in_arr[i][2] * 1000;
           currObj.position.z = in_arr[i][3] * 1000;
