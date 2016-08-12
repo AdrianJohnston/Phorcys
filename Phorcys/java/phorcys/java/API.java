@@ -1,3 +1,5 @@
+package phorcys.java;
+
 //TODO: 
 	//Import things like JSON reader/writer [√]
 	//Make more sensible classes []
@@ -33,7 +35,7 @@ import com.eclipsesource.json.JsonValue;
 import java.util.UUID;
 
 public class API{
-	static String URL = "http://localhost:5000/events";
+	static String URL = "http://localhost:8000/events";
 
 	public static void setUrl(String url){
 		URL = url;

@@ -1,3 +1,4 @@
+package phorcys.java;
 public class Edge implements Comparable<Edge>{
 	Node start, end;
 	private double weight;

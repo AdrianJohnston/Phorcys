@@ -1,3 +1,4 @@
+package phorcys.java;
 /**
  * A simple class representing a 2D vector with a whole bunch
  * of useful functions for use with Repast.

@@ -1,3 +1,4 @@
+package phorcys.java;
 import java.awt.Color;
 import java.util.Random;
 
@@ -45,14 +46,14 @@ public class Test {
 //		String img_win = API.image(null, "IMAGE TEST YO", png.toJson());
 		
 		//Generated Image Testing
-//		PNG png = new PNG(30, 30);
-//		png.createImage();
-//		png.setLabels("OLOLOLO");
-//		String imgg_win = API.image(null,"GEN IMAGE",png.toJson());
-//		for (int i = 0; i < 1000; i++){
-//			png.golTEST();
-//			API.image(imgg_win,"Small Game Of Life",png.toJson());
-//		}
+		PNG png = new PNG(30, 30);
+		png.createImage();
+		png.setLabels("OLOLOLO");
+		String imgg_win = API.image(null,"GEN IMAGE",png.toJson());
+		for (int i = 0; i < 1000; i++){
+			png.golTEST();
+			API.image(imgg_win,"Small Game Of Life",png.toJson());
+		}
 		
 		
 		

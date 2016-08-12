@@ -1,3 +1,6 @@
+package phorcys.java;
+
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayOutputStream;
@@ -37,7 +40,7 @@ public class PNG {
 		width = w;
 		height = h;
 		img = new int[(int)width*(int)height];
-		golTEST();
+//		golTEST();
 	}
 	
 	public void createImage(){
@@ -52,10 +55,23 @@ public class PNG {
 		imgFile.setRGB(0, 0, (int)width, (int)height, img, 0, (int)width);
 	}
 	
+	public void addElementToImage(int x, int y, Color col){
+		img[(y * (int)width) + x] = rgbToInt(col.getRed(), col.getGreen(), col.getBlue());
+	}
+	
+	public void newImage(){
+		img = new int[(int)width*(int)height]; 
+	}
+	
+	public void prepImage(){
+		imgFile = new BufferedImage((int)width, (int)height, BufferedImage.TYPE_INT_RGB);
+		imgFile.setRGB(0, 0, (int)width, (int)height, img, 0, (int)width);
+	}
+	
 	public void golTEST(){
 		int incr = 0;
 		for (int i = 0; i < width; i++){
-			for (int j = 0; j < height; j++){				
+			for (int j = 0; j < height; j++){
 				if (Utilities.generateCoinFlip()){
 					img[incr] = rgbToInt(0,0,0);
 				} else {

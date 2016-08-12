@@ -1,3 +1,4 @@
+package phorcys.java;
 public class Node {
 	String name;
 	String type;
