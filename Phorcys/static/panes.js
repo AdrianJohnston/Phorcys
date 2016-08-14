@@ -508,6 +508,7 @@ ImagePane.prototype = extend(Object.create(Pane.prototype), {
       ae.innerHTML = a[2];
       this.labels.appendChild(ae);
     }
+    
   },
 });
 

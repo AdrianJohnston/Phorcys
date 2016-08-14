@@ -23,6 +23,8 @@ public class PNG {
 	String[] labels;
 	double width = 1000;
 	double height = 0.0;
+	double scaleW = 1.0;
+	double scaleH = 1.0;;
 	
 	
 	public PNG(String location){
@@ -43,6 +45,11 @@ public class PNG {
 //		golTEST();
 	}
 	
+	public void setScale(double w, double h){
+		scaleW = w;
+		scaleH = h;
+	}
+	
 	public void createImage(){
 		int incr = 0;
 		for (int i = 0; i < width; i++){
@@ -56,7 +63,7 @@ public class PNG {
 	}
 	
 	public void addElementToImage(int x, int y, Color col){
-		img[(y * (int)width) + x] = rgbToInt(col.getRed(), col.getGreen(), col.getBlue());
+		img[(((int)height - 1 - y) * (int)width) + x] = rgbToInt(col.getRed(), col.getGreen(), col.getBlue());
 	}
 	
 	public void newImage(){
@@ -117,13 +124,13 @@ public class PNG {
 		}
 		
 		if (width > 0){
-			jobj.add("width", width);
+			jobj.add("width", width * scaleW);
 		} else {
 			jobj.add("width", 250);
 		}
 		
 		if (height > 0){
-			jobj.add("height", height);
+			jobj.add("height", height * scaleH);
 		} else {
 			jobj.add("height", 250);
 		}
